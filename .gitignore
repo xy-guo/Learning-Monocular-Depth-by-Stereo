@@ -1,0 +1,9 @@
+.idea
+*.so
+*.pyc
+*_ext
+*.o
+*.ckpt
+*work_dir*
+*.egg
+*.egg-info

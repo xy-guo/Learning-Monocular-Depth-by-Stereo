@@ -270,11 +270,11 @@ class StereoUnsupervisedFinetuneLoss(nn.Module):
 
         sup_l1_left_loss = [((left_disp_ests[i] - left_pt_disp[i]).abs() * ((1. - left_pt_occmask[i]) + 0.1)).mean() for
                             i in range(nscales)]
-        sup_loss = sum(add_weights(sup_l1_left_loss)) * 0.05
+        sup_loss = sum(add_weights(sup_l1_left_loss)) * 0.025
 
         sup_diff_left_loss = [((self.gradient_x(left_disp_ests[i]) - self.gradient_x(left_pt_disp[i])).abs().mean() +
                     (self.gradient_y(left_disp_ests[i]) - self.gradient_y(left_pt_disp[i])).abs().mean()) / 2.0 for i in range(nscales)]
-        sup_diff_loss = sum(add_weights(sup_diff_left_loss)) * 0.05
+        sup_diff_loss = sum(add_weights(sup_diff_left_loss)) * 0.05  # half lambda_1 lambda_2 produce more stable results
 
         total_loss = image_loss + sup_loss + sup_diff_loss
 

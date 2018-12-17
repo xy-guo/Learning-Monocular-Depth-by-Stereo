@@ -1,3 +1,5 @@
+# modified from the code of Monodepth, https://github.com/mrharicot/monodepth
+
 import numpy as np
 import cv2
 import argparse

@@ -1,3 +1,5 @@
+# modified from the code of Monodepth, https://github.com/mrharicot/monodepth
+
 import numpy as np
 import os
 import cv2
@@ -163,6 +165,7 @@ def sub2ind(matrixSize, rowSub, colSub):
     return rowSub * (n - 1) + colSub - 1
 
 
+# Modified by Xiaoyang Guo: interp and vel_depth option is removed, by default we use camera depth instead of LIDAR depth
 def generate_depth_map(calib_dir, velo_file_name, im_shape, cam=2):
     # load calibration files
     cam2cam = read_calib_file(calib_dir + 'calib_cam_to_cam.txt')

@@ -1,0 +1,35 @@
+scene_flow/
+├── disparity
+│   ├── TEST
+│   │   ├── A
+│   │   ├── B
+│   │   └── C
+│   └── TRAIN
+│       ├── 15mm_focallength
+│       ├── 35mm_focallength
+│       ├── A
+│       ├── B
+│       ├── C
+│       └── monkaa
+|           ├───a_rain_of_stones_x2
+|           ├───eating_camera2_x2
+|           ├───eating_naked_camera2_x2
+|           ├───eating_x2
+|           ├───...
+└── RGB_finalpass
+    ├── TEST
+    │   ├── A
+    │   ├── B
+    │   └── C
+    └── TRAIN
+        ├── 15mm_focallength
+        ├── 35mm_focallength
+        ├── A
+        ├── B
+        ├── C
+        └── monkaa
+            ├───a_rain_of_stones_x2
+            ├───eating_camera2_x2
+            ├───eating_naked_camera2_x2
+            ├───eating_x2
+            ├───...

@@ -42,6 +42,9 @@ parser.add_argument('--load_latest', help='load latest checkpoint from work dir'
 parser.add_argument('--load_ckpt', type=str, default="", help='load specific checkpoint')
 parser.add_argument('--num_threads', type=int, help='number of threads for data loading', default=8)
 
+parser.add_argument('--val_freq', type=int, help='validation frequency', default=1)
+parser.add_argument('--print_freq', type=int, help='print frequency', default=100)
+
 # parse and check arguments
 args = parser.parse_args()
 assert not (args.load_latest and args.load_ckpt)
@@ -104,7 +107,7 @@ def train():
             loss.backward()
             optimizer.step()
 
-            if global_step % 100 == 0:
+            if global_step % args.print_freq == 0:
                 loss_value = loss.detach().cpu().item()
                 print('B {}/{} E {}/{} | loss: {:.5f}'.format(epoch_idx, args.num_epochs, batch_idx, len(train_dataloader), loss_value))
 
@@ -115,6 +118,10 @@ def train():
                 if args.dataset == "kitti":
                     disps_np = image_outputs["left_disp_est"][0].data.cpu().numpy()[:, 0]
                     save_kitti_metrics(logger, "train", disps_np, sample["left_fn"][:len(disps_np)], global_step)
+
+        if (epoch_idx + 1) % args.val_freq != 0:
+            print("epoch {}, skip val".format(epoch_idx))
+            continue
 
         torch.save({
             'epoch': epoch_idx,
@@ -187,7 +194,7 @@ def test():
         disp_est /= disp_est.shape[2]
         disparities[sample_offset: sample_offset + num_samples] = disp_est
 
-        if istep % 100 == 0:
+        if istep % args.print_freq == 0:
             print("step {}/{} | EPE {}, P1 {}, P3 {}, P5 {}".format(istep, steps_total, np.mean(EPE), np.mean(P1),
                                                                       np.mean(P3), np.mean(P5)))
 

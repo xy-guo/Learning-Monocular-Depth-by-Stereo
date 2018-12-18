@@ -159,7 +159,7 @@ class StereoSupervisedWithoutOccmaskLoss(nn.Module):
                        range(nscales)])
         total_loss = l1_loss
 
-        disp_errors = [(disp_ests[i] - left_gts[i]).abs() for i in range(nscales)]
+        disp_errors = [(disp_ests[i] - left_gts[i]).abs() * left_valid_mask[i] for i in range(nscales)]
 
         return total_loss, {"total_loss": total_loss, "l1_loss": l1_loss}, \
                {"left_disp_est": disp_ests, "left_disp_error": disp_errors, "left_disp_gt": left_gts}

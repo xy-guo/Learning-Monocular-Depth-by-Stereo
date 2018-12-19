@@ -28,7 +28,7 @@ def ConvTranspose2dBlock1(c_in, c_out, k_size, stride, padding, output_padding):
 
 
 class MonocularVGG16(nn.Module):
-    def __init__(self, use_pretrained_weights=False):
+    def __init__(self, use_pretrained_weights):
         super(MonocularVGG16, self).__init__()
         self.use_pretrained_weights = use_pretrained_weights
         self.only_train_dec = False

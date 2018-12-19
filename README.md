@@ -21,7 +21,8 @@ TODO
 ## Training
     # Step 1, pretrain the stereo model on Scene Flow datasets
     ./run_train_stereo_sceneflow.sh
-    # Step 2, unsupervised fine-tune on KITTI Eigen Split
+    # Step 2, supervised or unsupervised fine-tune on KITTI Eigen Split
+    ./run_supft100_stereo_kitti.sh
     ./run_unsupft_stereo_kitti.sh
     # Step 3, train the monocular depth model
     ./run_distill_mono.sh
@@ -62,8 +63,7 @@ The evaluation code is from [Monodepth](https://github.com/mrharicot/monodepth).
 - [ ] Data preparation code
 - [ ] check requirements
 - [ ] Cityscapes pretraining code
-- [ ] Supervised finetune code
-- [ ] update use_pretrained_weights option for training monocular network. By default it is disabled.
+- [ ] update use_pretrained_weights option for training monocular network. By default it is enabled.
 
 # Citation
 If you find this code useful in your research, please cite:

@@ -10,12 +10,11 @@ scene_flow/
 │       ├── A
 │       ├── B
 │       ├── C
-│       └── monkaa
-|           ├───a_rain_of_stones_x2
-|           ├───eating_camera2_x2
-|           ├───eating_naked_camera2_x2
-|           ├───eating_x2
-|           ├───...
+│       ├───a_rain_of_stones_x2
+|       ├───eating_camera2_x2
+|       ├───eating_naked_camera2_x2
+|       ├───eating_x2
+|       ├───...
 └── RGB_finalpass
     ├── TEST
     │   ├── A
@@ -27,9 +26,8 @@ scene_flow/
         ├── A
         ├── B
         ├── C
-        └── monkaa
-            ├───a_rain_of_stones_x2
-            ├───eating_camera2_x2
-            ├───eating_naked_camera2_x2
-            ├───eating_x2
-            ├───...
+        ├───a_rain_of_stones_x2
+        ├───eating_camera2_x2
+        ├───eating_naked_camera2_x2
+        ├───eating_x2
+        ├───...

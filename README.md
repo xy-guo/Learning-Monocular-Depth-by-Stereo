@@ -9,13 +9,35 @@ The code is implemented with Python 2.7 (Anaconda) (Python 3.x will cause bugs) 
     conda install pytorch=0.4.1 torchvision -c pytorch
     conda install opencv3 -c menpo
     pip install tensorboardX
+    ./scripts/install.sh  # install correlation1d_package and resample1d_package
 
 # Dataset Preparation
 ## Scene Flow
-TODO (temporarily please refer to the folder structure file and train/test list to prepare the dataset)
+
+    DATASET_PATH=~/dataset/scene_flow  # or any other directory
+    mkdir -p $DATASET_PATH
+
+    # download finalpass frames and disparity
+    wget -i ./scripts/sceneflow_dataset_files.txt -P $DATASET_PATH
+    cd $DATASET_PATH
+
+    # extract finalpass frmaes
+    mkdir RGB_finalpass
+    tar -xvf flyingthings3d__frames_finalpass.tar --strip-components=1 -C RGB_finalpass
+    tar -xvf driving__frames_finalpass.tar --strip-components=1 -C RGB_finalpass/TRAIN
+    tar -xvf monkaa__frames_finalpass.tar --strip-components=1 -C RGB_finalpass/TRAIN
+
+    # extract disparity
+    tar -xvf flyingthings3d__disparity.tar.bz2
+    tar -xvf driving__disparity.tar.bz2 --strip-components=1 -C disparity/TRAIN
+    tar -xvf monkaa__disparity.tar.bz2 --strip-components=1 -C disparity/TRAIN
 
 ## KITTI Eigen Split
-TODO
+    DATASET_PATH=~/dataset/kitti_raw  # or any other directory
+    mkdir -p $DATASET_PATH
+    wget -i ./scripts/kitti_raw_dataset_files.txt -P $DATASET_PATH  # KITTI Raw (66 files)
+    cd $DATASET_PATH
+    unzip *.zip
 
 # Run the code
 ## Training
@@ -27,9 +49,9 @@ TODO
     # Step 3, train the monocular depth model
     ./run_distill_mono.sh
 ## Testing
-    # test the stereo model on KITTI Eigen Split, please update TEST_WORK_DIR in the bash file.
+    # test stereo models on KITTI Eigen Split, please update TEST_WORK_DIR in the bash file.
     ./run_test_stereo_kitti.sh
-    # test the monocular model on KITTI Eigen Split
+    # test monocular models on KITTI Eigen Split, please update TEST_WORK_DIR in the bash file.
     ./run_test_mono_kitti.sh
 
 The evaluation code is from [Monodepth](https://github.com/mrharicot/monodepth). We use the same crop option `--garg_crop` to evaluate the model. NOTE that we use the depth from camera view instead of LIDAR view, which is different from the default option of Monodepth.
@@ -60,10 +82,11 @@ The evaluation code is from [Monodepth](https://github.com/mrharicot/monodepth).
 
 
 # TODO
-- [ ] Data preparation code
-- [ ] check requirements
-- [ ] Cityscapes pretraining code
-- [ ] update use_pretrained_weights option for training monocular network. By default it is enabled.
+- [ ] Check training code related to Cityscapes dataset.
+
+# NOTE
+* By default use_pretrained_weights (use ImageNet pretrained weights) is enabled for monocular network.
+* The arguments of Correlation1d cannot be changed, or it may cause bugs.
 
 # Citation
 If you find this code useful in your research, please cite:

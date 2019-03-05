@@ -93,9 +93,10 @@ If you find this code useful in your research, please cite:
 
 ```
 @inproceedings{guo2018learning,
-  title={Learning Monocular Depth by Distilling Cross-domain Stereo Networks},
+  title={Learning monocular depth by distilling cross-domain stereo networks},
   author={Guo, Xiaoyang and Li, Hongsheng and Yi, Shuai and Ren, Jimmy and Wang, Xiaogang},
-  booktitle={ECCV},
+  booktitle={Proceedings of the European Conference on Computer Vision (ECCV)},
+  pages={484--500},
   year={2018}
 }
 ```
